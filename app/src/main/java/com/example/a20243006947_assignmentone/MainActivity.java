@@ -2,9 +2,8 @@ package com.example.a20243006947_assignmentone;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -14,27 +13,27 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ImageButton btnFacilities = findViewById(R.id.btnFacilities);
-        ImageButton btnEvents = findViewById(R.id.btnEvents);
-        ImageButton btnClubs = findViewById(R.id.btnClubs);
-        ImageButton btnSupport = findViewById(R.id.btnSupport);
+        LinearLayout cardFacilities = findViewById(R.id.cardFacilities);
+        LinearLayout cardEvents = findViewById(R.id.cardEvents);
+        LinearLayout cardClubs = findViewById(R.id.cardClubs);
+        LinearLayout cardSupport = findViewById(R.id.cardSupport);
 
-        btnFacilities.setOnClickListener(v -> {
+        cardFacilities.setOnClickListener(v -> {
             Toast.makeText(this, "Facilities clicked", Toast.LENGTH_SHORT).show();
             openDetail(0);
         });
 
-        btnEvents.setOnClickListener(v -> {
+        cardEvents.setOnClickListener(v -> {
             Toast.makeText(this, "Events clicked", Toast.LENGTH_SHORT).show();
             openDetail(1);
         });
 
-        btnClubs.setOnClickListener(v -> {
+        cardClubs.setOnClickListener(v -> {
             Toast.makeText(this, "Clubs clicked", Toast.LENGTH_SHORT).show();
             openDetail(2);
         });
 
-        btnSupport.setOnClickListener(v -> {
+        cardSupport.setOnClickListener(v -> {
             Toast.makeText(this, "Support clicked", Toast.LENGTH_SHORT).show();
             openDetail(3);
         });
