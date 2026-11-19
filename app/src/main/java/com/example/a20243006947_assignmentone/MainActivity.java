@@ -1,92 +1,48 @@
 package com.example.a20243006947_assignmentone;
 
+import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.activity.EdgeToEdge;
-
-import com.google.android.material.snackbar.Snackbar;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-import androidx.navigation.NavController;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-import androidx.navigation.fragment.NavHostFragment;
-
-import com.example.a20243006947_assignmentone.databinding.ActivityMainBinding;
-
-import android.view.Menu;
-import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
-
-    private AppBarConfiguration appBarConfiguration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_main);
 
-        ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        ImageButton btnFacilities = findViewById(R.id.btnFacilities);
+        ImageButton btnEvents = findViewById(R.id.btnEvents);
+        ImageButton btnClubs = findViewById(R.id.btnClubs);
+        ImageButton btnSupport = findViewById(R.id.btnSupport);
 
-        ViewCompat.setOnApplyWindowInsetsListener(binding.main, (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+        btnFacilities.setOnClickListener(v -> {
+            Toast.makeText(this, "Facilities clicked", Toast.LENGTH_SHORT).show();
+            openDetail(0);
         });
-        setSupportActionBar(binding.toolbar);
 
-        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.nav_host_fragment_content_main);
+        btnEvents.setOnClickListener(v -> {
+            Toast.makeText(this, "Events clicked", Toast.LENGTH_SHORT).show();
+            openDetail(1);
+        });
 
-        if (navHostFragment != null) {
-            NavController navController = navHostFragment.getNavController();
+        btnClubs.setOnClickListener(v -> {
+            Toast.makeText(this, "Clubs clicked", Toast.LENGTH_SHORT).show();
+            openDetail(2);
+        });
 
-            appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
-            NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        }
-
-        binding.fab.setOnClickListener(
-                view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAnchorView(R.id.fab)
-                        .setAction("Action", null).show()
-        );
+        btnSupport.setOnClickListener(v -> {
+            Toast.makeText(this, "Support clicked", Toast.LENGTH_SHORT).show();
+            openDetail(3);
+        });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.nav_host_fragment_content_main);
-        boolean handled = false;
-        if (navHostFragment != null) {
-            NavController navController = navHostFragment.getNavController();
-            handled = NavigationUI.navigateUp(navController, appBarConfiguration);
-        }
-        return handled || super.onSupportNavigateUp();
+    private void openDetail(int topicIndex) {
+        Intent intent = new Intent(this, DetailActivity.class);
+        intent.putExtra(DetailActivity.EXTRA_TOPIC_INDEX, topicIndex);
+        startActivity(intent);
     }
 }
